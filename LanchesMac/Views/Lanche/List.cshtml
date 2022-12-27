@@ -1,14 +1,28 @@
-﻿@model IEnumerable<LanchesMac.Models.Lanche>
+﻿@model LancheListViewModel
+
+@*@{
+    Layout = null; --Aqui é definido qual Layout a view vai usar
+}*@
+<!--<div>
+    <h2>@ViewData["Titulo"]</h2>
+</div>
+<h2>@ViewData["Data"]</h2>
+<hr />
+<hr />
+<h3>@ViewBag.Total @ViewBag.TotalLanches</h3>
+<hr />
+<h3>@TempData["Nome"]</h3>-->
+@*TempData persiste se for redirecionado para paginas diferentes, viewbag e viewdata nao*@
 
 <div>
-    <h2>Todos os Lanches</h2>
+    <h2>@Model.CategoriaAtual</h2>
 </div>
 
-@foreach (var lanche in Model)
-{
-    <div>
-        <h4>@lanche.Nome</h4>
-        <p><img src="@lanche.ImagemUrl"></p>
-        <h3>Preço : @lanche.Preco.ToString("c")</h3>
+<div class="container">
+    <div class="row">
+        @foreach (var lanche in Model.Lanches)
+        {
+            <partial name="_LancheResumo" for="@lanche" />    
+        }
     </div>
-}
+</div>
